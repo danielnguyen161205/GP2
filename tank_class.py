@@ -24,6 +24,7 @@ class Tank:
         self.x = x
         self.y = y
         self.player_number = player_number
+        self.base_speed = speed  # Store base speed
         self.speed = speed
         self.angle = 0  # Tank body angle
         self.turret_angle = 0  # Independent turret angle
@@ -36,6 +37,9 @@ class Tank:
         self.max_health = 3
         self.health = self.max_health
         self.kills = 0
+        
+        # Speed boost tracking
+        self.speed_boost = None
         
         self.original_sprite_path = "./assets/tankBlue.png" if player_number==1 else "./assets/tankRed.png"
         self.load_sprite(self.original_sprite_path)
@@ -123,6 +127,15 @@ class Tank:
     
     def update(self, walls=None):
         self.handle_input()
+        
+        # Update speed boost
+        if self.speed_boost:
+            if self.speed_boost.is_active():
+                self.speed = self.base_speed * self.speed_boost.boost_multiplier
+            else:
+                self.speed = self.base_speed
+                self.speed_boost = None
+        
         new_x = self.x + self.velocity_x
         new_y = self.y + self.velocity_y
         if self.rect:
@@ -238,3 +251,12 @@ class Tank:
             bullet_angle = (self.turret_angle + 180) % 360
             return Bullet(spawn_x, spawn_y, bullet_angle, self.bullet_img, self.player_number)
         return None
+    
+    def apply_speed_boost(self, duration):
+        """Apply speed boost effect"""
+        from powerup import SpeedBoost
+        self.speed_boost = SpeedBoost(duration)
+    
+    def has_speed_boost(self):
+        """Check if tank currently has speed boost"""
+        return self.speed_boost and self.speed_boost.is_active()
