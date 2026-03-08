@@ -148,7 +148,7 @@ def _check_bounce(self, walls, axis):
 ## Asset Sources
 
 ### Graphics
-- **Tank and Barrel Sprites**: [Old School Tanks by Uto Pix Studio](https://uto-pix-studio.itch.io/old-school-tanks)
+- **Tank, Barrel, Bullet and Wall Sprites**: [Top-Down Tanks by Kenney](https://www.kenney.nl/assets/top-down-tanks)
 
 ### Audio
 - **Explosion Sound Effect**: [LordSonny](https://pixabay.com/users/lordsonny-38439655/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=161647) from [Pixabay](https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=161647)
